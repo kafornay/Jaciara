@@ -127,6 +127,20 @@
     const descriptionInput = document.getElementById('description');
     const downloadBtn = document.getElementById('downloadBtn');
 
+    // Carregar descrição do localStorage, se houver
+    window.onload = function () {
+      const savedDescription = localStorage.getItem('description');
+      if (savedDescription) {
+        descriptionInput.value = savedDescription;
+      }
+    }
+
+    // Salvar a descrição no localStorage
+    descriptionInput.addEventListener('input', function () {
+      const description = descriptionInput.value.trim();
+      localStorage.setItem('description', description);
+    });
+
     upload.addEventListener('change', function () {
       const file = this.files[0];
       if (!file) return;
@@ -177,32 +191,6 @@
           ctx.font = '22px Roboto';
           ctx.fillText('Aceito Encomendas!', centerX, startY + 30);
 
-          // Ícones do WhatsApp e Instagram ajustados para não invadir o texto
-          const whatsappIcon = "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg";
-          const instagramIcon = "https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg";
-
-          const iconSize = 24;
-          const whatsappX = centerX - 70;
-          const instagramX = centerX + 70;
-
-          const whatsappY = startY + 60;
-          const instagramY = startY + 60;
-
-          const loadIcon = (src, x, y) => {
-            const img = new Image();
-            img.onload = () => {
-              ctx.drawImage(img, x, y, iconSize, iconSize);
-            };
-            img.src = src;
-          };
-
-          loadIcon(whatsappIcon, whatsappX, whatsappY);
-          loadIcon(instagramIcon, instagramX, instagramY);
-
-          ctx.font = '18px Roboto';
-          ctx.fillText('📱 WhatsApp: 22 99963-1760', centerX, startY + 60);
-          ctx.fillText('📸 Instagram: @JACIARA_ACESSORIOS', centerX, startY + 85);
-
           ctx.globalAlpha = 1.0;
           ctx.shadowBlur = 0;
         };
@@ -216,7 +204,7 @@
       link.download = 'jaciara-acessorios.png';
       link.href = canvas.toDataURL('image/png');
 
-      // Inicia o download diretamente no celular
+      // Inicia o download corretamente
       link.click();
     });
 
@@ -233,6 +221,7 @@
 
     function clearDescription() {
       descriptionInput.value = '';
+      localStorage.removeItem('description');
     }
   </script>
 </body>
