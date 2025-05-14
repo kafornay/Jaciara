@@ -80,7 +80,7 @@
     const ctx = canvas.getContext('2d');
 
     const watermark = new Image();
-    watermark.src = 'marca-dagua.png'; // Altere para o caminho real da imagem da marca
+    watermark.src = 'marca-dagua.png'; // Substitua com o caminho real da marca d'água
 
     upload.addEventListener('change', (e) => {
       const file = e.target.files[0];
@@ -88,12 +88,27 @@
       reader.onload = function(evt) {
         const img = new Image();
         img.onload = function() {
-          canvas.width = img.width;
-          canvas.height = img.height;
+          // Redimensionar imagem para 1000x1000 mantendo proporção
+          const size = 1000;
+          const scale = Math.min(size / img.width, size / img.height);
+          const newWidth = img.width * scale;
+          const newHeight = img.height * scale;
+
+          canvas.width = size;
+          canvas.height = size;
+
+          // Centralizar imagem redimensionada no canvas
+          const xOffset = (size - newWidth) / 2;
+          const yOffset = (size - newHeight) / 2;
+
           ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(img, 0, 0);
+          ctx.drawImage(img, xOffset, yOffset, newWidth, newHeight);
+
+          // Marca d'água no canto inferior direito com opacidade
           ctx.globalAlpha = 0.4;
-          ctx.drawImage(watermark, img.width - 320, img.height - 160, 300, 120);
+          const wmWidth = 300;
+          const wmHeight = 120;
+          ctx.drawImage(watermark, canvas.width - wmWidth - 20, canvas.height - wmHeight - 20, wmWidth, wmHeight);
           ctx.globalAlpha = 1.0;
         };
         img.src = evt.target.result;
@@ -103,7 +118,7 @@
 
     function download() {
       const link = document.createElement('a');
-      link.download = 'imagem-com-marca.png';
+      link.download = 'imagem-shopee.png';
       link.href = canvas.toDataURL();
       link.click();
     }
