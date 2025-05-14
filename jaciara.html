@@ -2,27 +2,19 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Marca d'Água - Texto Personalizado</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Roboto&display=swap" rel="stylesheet">
+  <title>Marca d'Água - Jaciara Acessórios</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Roboto', sans-serif;
-      background: linear-gradient(to bottom right, #fceabb, #f8b500);
+      background: #fceabb;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       margin: 0;
       padding: 20px;
-      color: #333;
-    }
-
-    h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      color: #222;
-      margin-bottom: 10px;
     }
 
     .card {
@@ -36,55 +28,81 @@
     }
 
     input[type="file"] {
+      margin-top: 10px;
+    }
+
+    textarea {
+      margin-top: 20px;
+      width: 100%;
+      height: 100px;
+      font-size: 16px;
       padding: 10px;
-      border: 1px solid #ccc;
       border-radius: 8px;
-      margin-bottom: 20px;
+      border: 1px solid #ccc;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
     }
 
     button {
-      background-color: #f8b500;
-      color: white;
-      border: none;
       padding: 12px 24px;
+      background-color: #f8b500;
+      border: none;
+      color: white;
+      font-size: 16px;
       border-radius: 8px;
-      font-size: 1rem;
       cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    button:hover {
-      background-color: #e0a200;
     }
 
     canvas {
-      max-width: 100%;
-      border-radius: 12px;
       margin-top: 20px;
+      max-width: 100%;
+      border-radius: 8px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .description-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
   </style>
 </head>
 <body>
   <div class="card">
     <h2>💎 Jaciara Acessórios</h2>
-    <p>Insira sua imagem e adicione uma marca d'água elegante com texto.</p>
+    <p>Adicione sua imagem com marca d'água personalizada:</p>
     <input type="file" id="upload" accept="image/*"><br>
+
+    <div class="description-section">
+      <textarea id="description" placeholder="Adicione uma descrição personalizada..."></textarea><br>
+      <div class="buttons">
+        <button onclick="copyDescription()">📋 Copiar</button>
+        <button onclick="clearDescription()">🧹 Limpar</button>
+      </div>
+    </div>
+    
     <canvas id="canvas"></canvas><br>
-    <button onclick="download()">📥 Baixar com Marca d'Água</button>
+    <button onclick="download()">📥 Baixar Imagem</button>
   </div>
 
   <script>
     const upload = document.getElementById('upload');
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
+    const descriptionInput = document.getElementById('description');
 
-    upload.addEventListener('change', (e) => {
-      const file = e.target.files[0];
+    upload.addEventListener('change', function () {
+      const file = this.files[0];
+      if (!file) return;
+
       const reader = new FileReader();
-      reader.onload = function(evt) {
+      reader.onload = function (e) {
         const img = new Image();
-        img.onload = function() {
+        img.onload = function () {
           const size = 1000;
           const scale = Math.min(size / img.width, size / img.height);
           const newWidth = img.width * scale;
@@ -96,34 +114,91 @@
           const xOffset = (size - newWidth) / 2;
           const yOffset = (size - newHeight) / 2;
 
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.clearRect(0, 0, size, size);
           ctx.drawImage(img, xOffset, yOffset, newWidth, newHeight);
 
-          // Adicionar texto da marca d'água
-          ctx.globalAlpha = 0.5;
-          ctx.fillStyle = '#000';
-          ctx.font = 'bold 28px Roboto';
-          ctx.textAlign = 'right';
-          ctx.fillText('Jaciara Acessórios', canvas.width - 30, canvas.height - 70);
+          // Marca d'água centralizada com texto mais escuro
+          ctx.globalAlpha = 0.7;
+          ctx.fillStyle = '#333333';  // Cor mais escura para o texto
+          ctx.textAlign = 'center';
+          ctx.shadowColor = 'rgba(0,0,0,0.6)';
+          ctx.shadowOffsetX = 2;
+          ctx.shadowOffsetY = 2;
+          ctx.shadowBlur = 4;
 
-          ctx.font = '20px Roboto';
-          ctx.fillText('Aceito Encomendas!', canvas.width - 30, canvas.height - 40);
+          const centerX = size / 2;
+          const startY = size - 120;
+
+          // Exibir descrição personalizada, se houver
+          const description = descriptionInput.value.trim();
+          if (description) {
+            ctx.font = 'italic 36px "Playfair Display", serif'; // Fonte mais delicada
+            ctx.fillStyle = 'rgba(51, 51, 51, 0.4)'; // Aplicando transparência de 40%
+            ctx.fillText(description, centerX, startY - 90);  // Subir 2 linhas
+          }
+
+          // Texto da marca d'água
+          ctx.font = 'bold 30px Roboto';
+          ctx.fillStyle = '#333333';
+          ctx.fillText('💎 Jaciara Acessórios', centerX, startY);
+
+          ctx.font = '22px Roboto';
+          ctx.fillText('Aceito Encomendas!', centerX, startY + 30);
+
+          // Ícones originais do WhatsApp e Instagram
+          const whatsappIcon = "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg";
+          const instagramIcon = "https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg";
+
+          const iconSize = 24;
+          const whatsappX = centerX - 70;
+          const instagramX = centerX + 70;
+
+          const whatsappY = startY + 60;
+          const instagramY = startY + 60;
+
+          const loadIcon = (src, x, y) => {
+            const img = new Image();
+            img.onload = () => {
+              ctx.drawImage(img, x, y, iconSize, iconSize);
+            };
+            img.src = src;
+          };
+
+          loadIcon(whatsappIcon, whatsappX, whatsappY);
+          loadIcon(instagramIcon, instagramX, instagramY);
 
           ctx.font = '18px Roboto';
-          ctx.fillText('📲 WhatsApp: 22 99963-1760', canvas.width - 30, canvas.height - 15);
+          ctx.fillText('📱 WhatsApp: 22 99963-1760', centerX, startY + 60);
+          ctx.fillText('📸 Instagram: @JACIARA_ACESSORIOS', centerX, startY + 85);
 
           ctx.globalAlpha = 1.0;
+          ctx.shadowBlur = 0;
         };
-        img.src = evt.target.result;
+        img.src = e.target.result;
       };
       reader.readAsDataURL(file);
     });
 
     function download() {
       const link = document.createElement('a');
-      link.download = 'imagem-marca-dagua.png';
+      link.download = 'jaciara-acessorios.png';
       link.href = canvas.toDataURL();
       link.click();
+    }
+
+    function copyDescription() {
+      const description = descriptionInput.value.trim();
+      if (description) {
+        navigator.clipboard.writeText(description)
+          .then(() => alert("Descrição copiada para a área de transferência!"))
+          .catch(err => console.error("Erro ao copiar: ", err));
+      } else {
+        alert("Não há descrição para copiar.");
+      }
+    }
+
+    function clearDescription() {
+      descriptionInput.value = '';
     }
   </script>
 </body>
