@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Marca d'Água - Jaciara Acessórios</title>
+  <title>Marca d'Água - Texto Personalizado</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Roboto&display=swap" rel="stylesheet">
   <style>
     body {
@@ -68,7 +68,7 @@
 <body>
   <div class="card">
     <h2>💎 Jaciara Acessórios</h2>
-    <p>Adicione sua marca d'água com estilo!</p>
+    <p>Insira sua imagem e adicione uma marca d'água elegante com texto.</p>
     <input type="file" id="upload" accept="image/*"><br>
     <canvas id="canvas"></canvas><br>
     <button onclick="download()">📥 Baixar com Marca d'Água</button>
@@ -79,16 +79,12 @@
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
 
-    const watermark = new Image();
-    watermark.src = 'marca-dagua.png'; // Substitua com o caminho real da marca d'água
-
     upload.addEventListener('change', (e) => {
       const file = e.target.files[0];
       const reader = new FileReader();
       reader.onload = function(evt) {
         const img = new Image();
         img.onload = function() {
-          // Redimensionar imagem para 1000x1000 mantendo proporção
           const size = 1000;
           const scale = Math.min(size / img.width, size / img.height);
           const newWidth = img.width * scale;
@@ -97,18 +93,25 @@
           canvas.width = size;
           canvas.height = size;
 
-          // Centralizar imagem redimensionada no canvas
           const xOffset = (size - newWidth) / 2;
           const yOffset = (size - newHeight) / 2;
 
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           ctx.drawImage(img, xOffset, yOffset, newWidth, newHeight);
 
-          // Marca d'água no canto inferior direito com opacidade
-          ctx.globalAlpha = 0.4;
-          const wmWidth = 300;
-          const wmHeight = 120;
-          ctx.drawImage(watermark, canvas.width - wmWidth - 20, canvas.height - wmHeight - 20, wmWidth, wmHeight);
+          // Adicionar texto da marca d'água
+          ctx.globalAlpha = 0.5;
+          ctx.fillStyle = '#000';
+          ctx.font = 'bold 28px Roboto';
+          ctx.textAlign = 'right';
+          ctx.fillText('Jaciara Acessórios', canvas.width - 30, canvas.height - 70);
+
+          ctx.font = '20px Roboto';
+          ctx.fillText('Aceito Encomendas!', canvas.width - 30, canvas.height - 40);
+
+          ctx.font = '18px Roboto';
+          ctx.fillText('📲 WhatsApp: 22 99963-1760', canvas.width - 30, canvas.height - 15);
+
           ctx.globalAlpha = 1.0;
         };
         img.src = evt.target.result;
@@ -118,7 +121,7 @@
 
     function download() {
       const link = document.createElement('a');
-      link.download = 'imagem-shopee.png';
+      link.download = 'imagem-marca-dagua.png';
       link.href = canvas.toDataURL();
       link.click();
     }
