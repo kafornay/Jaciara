@@ -127,7 +127,6 @@
     const descriptionInput = document.getElementById('description');
     const downloadBtn = document.getElementById('downloadBtn');
 
-    // Carregar descrição do localStorage, se houver
     window.onload = function () {
       const savedDescription = localStorage.getItem('description');
       if (savedDescription) {
@@ -135,7 +134,6 @@
       }
     }
 
-    // Salvar a descrição no localStorage
     descriptionInput.addEventListener('input', function () {
       const description = descriptionInput.value.trim();
       localStorage.setItem('description', description);
@@ -163,9 +161,7 @@
           ctx.clearRect(0, 0, size, size);
           ctx.drawImage(img, xOffset, yOffset, newWidth, newHeight);
 
-          // Marca d'água centralizada com texto mais escuro
           ctx.globalAlpha = 0.7;
-          ctx.fillStyle = '#333333';  // Cor mais escura para o texto
           ctx.textAlign = 'center';
           ctx.shadowColor = 'rgba(0,0,0,0.6)';
           ctx.shadowOffsetX = 2;
@@ -175,15 +171,27 @@
           const centerX = size / 2;
           const startY = size - 120;
 
-          // Exibir descrição personalizada, se houver
           const description = descriptionInput.value.trim();
           if (description) {
-            ctx.font = 'italic 36px "Playfair Display", serif'; // Fonte mais delicada
-            ctx.fillStyle = 'rgba(51, 51, 51, 0.4)'; // Aplicando transparência de 40%
-            ctx.fillText(description, centerX, startY - 90);  // Subir 2 linhas
+            ctx.font = 'italic 36px "Playfair Display", serif';
+            const textMetrics = ctx.measureText(description);
+            const textWidth = textMetrics.width;
+            const textHeight = 36;
+            const paddingX = 16;
+            const paddingY = 10;
+
+            const rectX = centerX - (textWidth / 2) - (paddingX / 2);
+            const rectY = startY - 90 - textHeight + paddingY / 2;
+            const rectWidth = textWidth + paddingX;
+            const rectHeight = textHeight + paddingY;
+
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+            ctx.fillRect(rectX, rectY, rectWidth, rectHeight);
+
+            ctx.fillStyle = 'rgba(51, 51, 51, 0.8)';
+            ctx.fillText(description, centerX, startY - 90);
           }
 
-          // Texto da marca d'água
           ctx.font = 'bold 30px Roboto';
           ctx.fillStyle = '#333333';
           ctx.fillText('💎 Jaciara Acessórios', centerX, startY);
@@ -206,8 +214,6 @@
       const link = document.createElement('a');
       link.download = 'jaciara-acessorios.png';
       link.href = canvas.toDataURL('image/png');
-
-      // Inicia o download corretamente
       link.click();
     });
 
