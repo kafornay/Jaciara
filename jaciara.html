@@ -216,8 +216,8 @@
       link.download = 'jaciara-acessorios.png';
       link.href = canvas.toDataURL('image/png');
 
-      // Para dispositivos móveis, simula o clique no link
-      link.dispatchEvent(new MouseEvent('click'));
+      // Inicia o download diretamente no celular
+      link.click();
     });
 
     function copyDescription() {
