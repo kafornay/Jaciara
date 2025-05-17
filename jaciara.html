@@ -200,7 +200,9 @@
             const yOffset = (size - newHeight) / 2;
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(img, xOffset, yOffset, newWidth, newHeight);
+            ctx.fillStyle = hexToRGBA(fundoCorInput.value, 0.8);
+            ctx.fillRect(xOffset, size, newWidth, extraHeight);
+
 
             ctx.globalAlpha = 1.0;
             ctx.shadowBlur = 0;
