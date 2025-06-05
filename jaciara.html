@@ -4,294 +4,446 @@
     <meta charset="UTF-8">
     <title>Jaciara Acessórios - Personalize sua Imagem</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=EB+Garamond:ital@1&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #F7CEE1; /* Rosa claro como destaque */
+            --primary-dark: #F0B6D7; /* Rosa um pouco mais escuro para hover */
+            --background-light: #F8F0F4; /* Fundo rosa bem claro */
+            --card-background: #FFFFFF; /* Branco para o card */
+            --text-dark: #333333; /* Preto suave para texto */
+            --text-medium: #777777; /* Cinza médio */
+            --text-light: #FFFFFF;
+            --border-color: #E0BBE4; /* Lilás claro para borda */
+            --focus-shadow: rgba(247, 206, 225, 0.4); /* Sombra de foco rosa */
+            --card-shadow: rgba(0, 0, 0, 0.08); /* Sombra suave para o card */
+        }
+
         body {
             font-family: 'Roboto', sans-serif;
-            background: #fceabb;
+            background: var(--background-light);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            padding: 30px;
+            color: var(--text-dark);
+            box-sizing: border-box;
+            line-height: 1.7;
         }
 
         .card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            text-align: center;
+            background: var(--card-background);
+            border-radius: 12px; /* Bordas mais arredondadas */
+            box-shadow: 0 8px 25px var(--card-shadow); /* Sombra mais suave */
+            padding: 40px;
             width: 100%;
-            max-width: 500px;
-            display: flex;
-            flex-direction: column;
+            max-width: 760px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 35px;
             box-sizing: border-box;
+            border: 1px solid var(--border-color);
         }
 
         h2 {
-            font-size: 24px;
-            color: #333;
-            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 38px;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
         }
 
-        input[type='file'],
+        h2 .diamond-icon {
+            font-size: 44px;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+
+        h3 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 600;
+            font-size: 22px;
+            color: var(--text-dark);
+            margin-top: 25px;
+            margin-bottom: 18px;
+            text-align: left;
+            width: 100%;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+            letter-spacing: 0.6px;
+        }
+
+        p {
+            font-size: 16px;
+            color: var(--text-medium);
+            text-align: left;
+            width: 100%;
+            margin-bottom: 22px;
+        }
+
+        label {
+            font-weight: 500;
+            font-size: 15px;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            display: block;
+            text-align: left;
+            width: 100%;
+        }
+
+        input[type='file'] {
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: #FFFFFF; /* Branco para o input */
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type='file']:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px var(--focus-shadow);
+        }
+
+        input[type='file']::file-selector-button {
+            background-color: var(--primary-color);
+            color: var(--text-dark);
+            border: none;
+            padding: 11px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            font-size: 15px;
+            font-weight: 600;
+            margin-right: 16px;
+        }
+
+        input[type='file']::file-selector-button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
         input[type='number'],
         input[type='color'],
         textarea,
         select {
-            margin-top: 10px;
-            padding: 12px;
+            padding: 12px 18px;
             font-size: 16px;
             border-radius: 8px;
-            border: 1px solid #ccc;
-            width: calc(100% - 24px);
+            border: 1px solid var(--border-color);
+            width: 100%;
             box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background-color: #FFFFFF; /* Branco para os inputs */
+            color: var(--text-dark);
+        }
+
+        input[type='number']:focus,
+        input[type='color']:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px var(--focus-shadow);
         }
 
         textarea {
-            height: 80px;
-            resize: none;
-            white-space: pre-line;
+            min-height: 120px;
+            resize: vertical;
         }
 
         .buttons {
             display: flex;
-            justify-content: center; /* Centraliza os botões */
-            gap: 15px; /* Aumenta o espaço entre os botões */
-            margin-top: 20px; /* Aumenta o espaço acima dos botões */
-            flex-wrap: wrap; /* Permite que os botões quebrem para a próxima linha em telas menores */
+            justify-content: flex-start;
+            gap: 18px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
         }
 
         button {
-            padding: 12px 24px; /* Aumenta o padding horizontal para deixar os botões maiores */
-            background-color: #f8b500;
+            padding: 10px 16px; /* Reduzindo um pouco o padding */
+            background-color: var(--primary-color);
             border: none;
-            color: white;
-            font-size: 16px; /* Aumenta o tamanho da fonte dos botões */
-            border-radius: 8px;
+            color: var(--text-dark);
+            font-size: 14px; /* Reduzindo um pouco a fonte */
+            font-weight: 500; /* Deixando um pouco mais leve */
+            border-radius: 6px; /* Mais arredondamento */
             cursor: pointer;
-            min-width: 150px; /* Define uma largura mínima para os botões */
+            min-width: 80px; /* Ajustando a largura mínima */
             box-sizing: border-box;
-            transition: background-color 0.3s ease; /* Adiciona uma transição suave na cor de fundo */
+            transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.3s ease;
+            box-shadow: 0 3px 8px rgba(247, 206, 225, 0.5); /* Sombra rosa suave */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
         }
 
         button:hover {
-            background-color: #e0a400; /* Escurece o botão no hover para feedback visual */
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 5px 12px rgba(247, 206, 225, 0.7);
         }
 
-        canvas {
-            margin-top: 20px;
-            max-width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            touch-action: none;
-            box-sizing: border-box;
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 3px rgba(247, 206, 225, 0.3);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
         }
 
         .valor-container {
-            margin-top: 15px;
-            background-color: rgba(0, 0, 0, 0.6);
-            color: #fff;
-            padding: 15px 20px;
-            border-radius: 8px;
-            font-size: 20px;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 20px;
+            margin-top: 20px;
+            background-color: #FFFFFF; /* Branco para o container do valor */
+            color: var(--primary-color);
+            padding: 28px;
+            border-radius: 12px; /* Mais arredondado */
+            font-size: 28px;
+            font-weight: 700;
+            text-align: left;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            gap: 14px;
             box-sizing: border-box;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* Sombra suave */
+            border: 1px solid var(--border-color); /* Borda lilás clara */
         }
 
         .valor-container label {
-            width: 100%;
-            text-align: left;
-            box-sizing: border-box;
+            color: var(--text-dark);
+            font-size: 15px;
+            font-weight: 500;
         }
 
-        .color-picker-group {
-            margin-top: 15px;
-            text-align: left;
+        .valor-container input {
+            background-color: #F8F0F4; /* Fundo rosa claro para o input do valor */
+            border: 1px solid var(--border-color);
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 11px 16px;
+            border-radius: 6px;
+        }
+
+        .valor-container input::placeholder {
+            color: #AAAAAA;
+        }
+
+        .color-picker-group,
+        .font-size-group,
+        .font-family-group,
+        .slide-group {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            box-sizing: border-box;
+            gap: 10px;
+            margin-bottom: 20px;
         }
-        .color-picker-group label {
-            font-weight: 600;
+
+        input[type='color'] {
+            height: 30px; /* Reduzindo a altura */
+            padding: 5px;
+            border-radius: 6px; /* Mais arredondado */
+            border: 1px solid var(--border-color); /* Borda lilás clara */
+            width: 50px; /* Ajustando a largura */
+        }
+
+        input[type='number']#descFontSize {
+            padding: 6px;
             font-size: 14px;
-            margin-right: 8px;
-            box-sizing: border-box;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: #FFFFFF;
+            color: var(--text-dark);
+            width: 50px;
         }
 
-        #resetZoomBtn {
-            margin-top: 15px;
-            padding: 12px;
-            background-color: #f8b500;
-            border: none;
-            color: white;
-            font-size: 16px; /* Aumenta o tamanho da fonte do botão Reset */
-            border-radius: 8px;
-            cursor: pointer;
+        input[type='range'] {
+            -webkit-appearance: none;
             width: 100%;
-            box-sizing: border-box;
-            transition: background-color 0.3s ease; /* Adiciona transição ao botão Reset */
+            height: 8px;
+            background: var(--border-color); /* Lilás claro para o range */
+            border-radius: 4px;
+            outline: none;
+            opacity: 0.9;
+            transition: opacity 0.2s;
         }
 
-        #resetZoomBtn:hover {
-            background-color: #e0a400; /* Escurece no hover também */
+        input[type='range']::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(247, 206, 225, 0.6); /* Sombra rosa */
+            margin-top: -6px;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        input[type='range']::-webkit-slider-thumb:hover {
+            background-color: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        input[type='range']::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(247, 206, 225, 0.6); /* Sombra rosa */
+        }
+        input[type='range']::-moz-range-thumb:hover {
+            background-color: var(--primary-dark);
+        }
+
+        canvas {
+            margin-top: 30px;
+            max-width: 100%;
+            border-radius: 12px; /* Mais arredondado */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            touch-action: none;
+            border: 1px solid var(--border-color); /* Borda lilás clara */
+            box-sizing: border-box;
+        }
+
+        #downloadBtn {
+            margin-top: 30px;
+        }
+
+        .description-controls {
+            display: flex;
+            align-items: center;
+            margin-top: 8px;
+            margin-bottom: 10px;
+        }
+
+        .description-controls button {
+            margin-right: 10px;
+            padding: 8px 14px;
+            font-size: 14px;
+            min-width: auto;
+            border-radius: 6px; /* Mais arredondado */
+            background-color: var(--primary-color);
+            color: var(--text-dark);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            line-height: 1;
+            text-decoration: none; /* Remover sublinhado de links */
+        }
+         .description-controls button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .description-controls button:first-child {
+            margin-left: 0;
         }
 
         .font-size-group {
-            margin-top: 15px;
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            box-sizing: border-box;
+            margin-bottom: 0 !important;
         }
 
-        .font-family-group {
-            margin-top: 15px;
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            box-sizing: border-box;
-        }
-
-        .slide-group {
-            margin-top: 15px;
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            box-sizing: border-box;
-        }
-        .slide-group label {
-            font-weight: 600;
-            font-size: 14px;
-            margin-right: 8px;
-            box-sizing: border-box;
-        }
-
-        @media (max-width: 480px) {
-            h2 {
-                font-size: 20px;
-            }
-            .valor-container {
-                font-size: 18px;
-                padding: 12px 16px;
-            }
-            button {
-                font-size: 14px;
-                padding: 10px 20px; /* Ajusta o padding para telas menores */
-                min-width: auto; /* Remove a largura mínima para melhor adaptação em telas pequenas */
-                flex: 1; /* Permite que os botões se expandam para preencher a largura disponível */
-            }
-            textarea {
-                height: 70px;
-            }
-            #resetZoomBtn {
-                font-size: 14px;
-                padding: 10px;
-            }
-            .color-picker-group,
-            .font-size-group,
-            .font-family-group,
-            .slide-group {
-                align-items: center;
-            }
-            input[type='file'],
-            input[type='number'],
-            input[type='color'],
-            textarea,
-            select {
-                width: 100%;
-                box-sizing: border-box;
-            }
-            .valor-container {
-                align-items: center;
-            }
-            .buttons {
-                gap: 10px; /* Reduz o gap em telas menores */
-            }
+        .color-picker-group {
+            margin-bottom: 0 !important;
         }
     </style>
 </head>
 <body>
     <div class="card">
-        <h2>💎 Jaciara Acessórios</h2>
-        <p>Adicione sua imagem personalizada:</p>
+        <h2><span class="diamond-icon">💎</span> Jaciara Acessórios</h2>
+        <p>Bem-vinda à sua ferramenta de personalização premium! Crie imagens deslumbrantes para seus produtos com facilidade e elegância.</p>
 
-        <input type="file" id="upload" accept="image/*" />
-        <textarea id="description" placeholder="Adicione uma descrição personalizada..."></textarea>
-
-        <div class="buttons">
-            <button onclick="copyDescription()">📋 Copiar</button>
-            <button onclick="clearDescription()">🧹 Limpar</button>
+        <h3>1. Imagem do Produto</h3>
+        <div class="input-group">
+            <label for="upload">Escolha a imagem principal do seu produto de alta qualidade:</label>
+            <input type="file" id="upload" accept="image/*" />
         </div>
 
-        <div class="valor-container">
-            <label for="valor">Valor</label><br />
-            <input type="number" id="valor" placeholder="Digite o valor" />
-            <label for="valorFontSize">Tamanho da Fonte do Valor:</label>
-            <input type="number" id="valorFontSize" value="40" min="12" max="72">
+        <h3>2. Detalhes da Descrição</h3>
+        <div class="input-group" style="display: flex; flex-direction: column;">
+            <label for="description">Insira a descrição do produto:</label>
+            <textarea id="description" placeholder="Descreva seu produto aqui para que o brilho dele apareça na imagem..."></textarea>
+            <div class="description-controls">
+                <button type="button" onclick="copyDescription()">📋 Copiar</button>
+                <button type="button" onclick="clearDescription()">🧹 Limpar</button>
+                <span style="display: inline-flex; align-items: center; justify-content: center; margin-left: 10px; padding: 6px 10px; font-size: 14px; min-width: auto; border-radius: 6px; background-color: var(--primary-color); color: var(--text-dark); border: 1px solid var(--border-color);">
+                    <label for="descFontSize" style="margin-bottom: 0; margin-right: 5px; font-size: 14px;">Tam:</label>
+                    <input type="number" id="descFontSize" value="36" min="12" max="72">
+                </span>
+                <span style="display: inline-flex; align-items: center; justify-content: center; margin-left: 10px; padding: 6px 10px; font-size: 14px; min-width: auto; border-radius: 6px; background-color: var(--primary-color); color: var(--text-dark); border: 1px solid var(--border-color);">
+                    <label for="descCor" style="margin-bottom: 0; margin-right: 5px; font-size: 14px;">Cor:</label>
+                    <input type="color" id="descCor" value="#FFFFFF">
+                </span>
+                <div class="font-family-group" style="margin-left: 15px;">
+                    <label for="descFontFamily" style="margin-bottom: 0; font-size: 14px;">Fonte:</label>
+                    <select id="descFontFamily" style="padding: 6px 10px; font-size: 14px; border-radius: 6px; border: 1px solid var(--border-color); background-color: #FFFFFF; color: var(--text-dark); width: 180px;">
+                        <option value="Playfair Display">Playfair Display (Serif)</option>
+                        <option value="Roboto">Roboto</option>
+                        <option value="Inter">Inter (Sans-serif)</option>
+                        <option value="EB Garamond">EB Garamond (Clássica)</option>
+                        <option value="Poppins">Poppins</option>
+                    </select>
+                </div>
+            </div>
         </div>
 
-        <p>Upload da sua logo (PNG):</p>
-        <input type="file" id="logoUpload" accept="image/png" />
-
-        <div class="color-picker-group">
-            <label for="fundoCor">Cor da faixa:</label>
-            <input type="color" id="fundoCor" value="#000000" />
-        </div>
-        <div class="color-picker-group">
-            <label for="faixaTextoCor">Cor do texto da faixa:</label>
-            <input type="color" id="faixaTextoCor" value="#ffffff" />
-        </div>
-
-        <div class="color-picker-group">
-            <label for="descCor">Cor da descrição:</label>
-            <input type="color" id="descCor" value="#FFFFFF" />
-        </div>
-
-        <div class="color-picker-group">
-            <label for="valorCor">Cor do valor:</label>
-            <input type="color" id="valorCor" value="#f8b500" />
+        <h3 style="margin-top: 30px;">3. Preço e Identidade</h3>
+        <div class="valor-container input-group">
+            <label for="valor">Defina o valor do produto (apenas números, ex: 99.99):</label>
+            <input type="number" id="valor" placeholder="Ex: 99.99" step="0.01" />
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <div class="font-size-group">
+                    <label for="valorFontSize">Tamanho da Fonte do Valor:</label>
+                    <input type="number" id="valorFontSize" value="40" min="12" max="72">
+                </div>
+                <div class="color-picker-group">
+                    <label for="valorCor">Cor do Texto do Valor:</label>
+                    <input type="color" id="valorCor" value="#DAA520" />
+                </div>
+            </div>
         </div>
 
-        <div class="font-size-group">
-            <label for="descFontSize">Tamanho da Fonte:</label>
-            <input type="number" id="descFontSize" value="36" min="12" max="72">
+        <div class="input-group">
+            <label for="logoUpload">Faça o upload da sua logo (recomendamos PNG transparente para um toque profissional):</label>
+            <input type="file" id="logoUpload" accept="image/png" />
         </div>
 
-        <div class="slide-group">
-            <label for="faixaWidth">Largura da Faixa:</label>
+        <h3>4. Ajustes Visuais Finos</h3>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <div class="color-picker-group input-group">
+                <label for="fundoCor">Cor da Faixa Inferior:</label>
+                <input type="color" id="fundoCor" value="#000000" />
+            </div>
+            <div class="color-picker-group input-group">
+                <label for="faixaTextoCor">Cor do Texto da Faixa Inferior:</label>
+                <input type="color" id="faixaTextoCor" value="#ffffff" />
+            </div>
+        </div>
+
+        <div class="slide-group input-group">
+            <label for="faixaWidth">Largura da Faixa Inferior (% da imagem):</label>
             <input type="range" id="faixaWidth" min="0" max="100" value="100">
         </div>
-        <div class="slide-group">
-            <label for="descriptionWidthPercentage">Largura da Descrição:</label>
+        <div class="slide-group input-group">
+            <label for="descriptionWidthPercentage">Largura da Descrição (% da imagem):</label>
             <input type="range" id="descriptionWidthPercentage" min="10" max="100" value="80">
         </div>
 
-        <div class="font-family-group">
-            <label for="descFontFamily">Fonte da Descrição:</label>
-            <select id="descFontFamily">
-                <option value="EB Garamond">EB Garamond</option>
-                <option value="Roboto">Roboto</option>
-                <option value="Poppins">Poppins</option>
-                <option value="Arial">Arial</option>
-                <option value="Verdana">Verdana</option>
-            </select>
-        </div>
-
         <canvas id="canvas"></canvas>
-        <button id="downloadBtn">📥 Baixar Imagem</button>
+        <button id="downloadBtn">📥 Baixar Imagem Personalizada</button>
     </div>
 
     <script>
@@ -319,7 +471,7 @@
         let valorPos = { x: 500, y: 140 };
         let faixaWidthPercentage = 100;
         let descFontSize = 36;
-        let descFontFamily = 'EB Garamond';
+        let descFontFamily = 'Playfair Display';
         let valorFontSize = 40;
         let lines = [];
         let maxLineWidth = 0;
@@ -329,7 +481,6 @@
         let calculatedMaxWidth = 0;
         let newWidth = 0;
         let newHeight = 0;
-
 
         let dragging = null;
         let dragOffset = { x: 0, y: 0 };
@@ -342,62 +493,72 @@
         }
 
         function drawCanvas() {
-            if (!img.src) return;
-
-            const size = 1000;
-            const scale = Math.min(size / img.width, size / img.height);
-            imageScale = scale;
-            newWidth = img.width * scale;
-            newHeight = img.height * scale;
-
+            const baseCanvasWidth = 1000;
+            const baseCanvasHeight = 1000;
             const extraHeight = 140;
-            canvas.width = size;
-            canvas.height = size + extraHeight;
 
-            const xOffset = (size - newWidth) / 2;
-            const yOffset = (size - newHeight) / 2;
-            const faixaWidth = newWidth * (faixaWidthPercentage / 100);
-            calculatedMaxWidth = newWidth * (maxDescriptionWidthPercentage / 100);
-
-
+            canvas.width = baseCanvasWidth;
+            canvas.height = baseCanvasHeight + extraHeight;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(img, xOffset, yOffset, newWidth, newHeight);
 
+            if (img.src) {
+                const scale = Math.min(baseCanvasWidth / img.width, baseCanvasHeight / img.height);
+                imageScale = scale;
+                newWidth = img.width * scale;
+                newHeight = img.height * scale;
+
+                const xOffset = (baseCanvasWidth - newWidth) / 2;
+                const yOffset = (baseCanvasHeight - newHeight) / 2;
+                ctx.drawImage(img, xOffset, yOffset, newWidth, newHeight);
+            } else {
+                ctx.fillStyle = '#f0f0f0';
+                ctx.fillRect(0, 0, baseCanvasWidth, baseCanvasHeight);
+                ctx.fillStyle = '#cccccc';
+                ctx.font = '30px Roboto';
+                ctx.textAlign = 'center';
+                ctx.fillText('Envie uma imagem para começar!', baseCanvasWidth / 2, baseCanvasHeight / 2);
+            }
+
+            const faixaWidth = baseCanvasWidth * (faixaWidthPercentage / 100);
+            const faixaX = (baseCanvasWidth - faixaWidth) / 2;
             ctx.globalAlpha = 1.0;
             ctx.shadowBlur = 0;
-            ctx.fillStyle = hexToRGBA(fundoCorInput.value, 0.8);
-            ctx.fillRect(xOffset + (newWidth - faixaWidth)/2, size, faixaWidth, extraHeight);
+            ctx.fillStyle = hexToRGBA(fundoCorInput.value, 0.85);
+            ctx.fillRect(faixaX, baseCanvasHeight, faixaWidth, extraHeight);
 
             ctx.fillStyle = faixaTextoCorInput.value;
             ctx.font = 'bold 28px Roboto';
             ctx.textAlign = 'center';
-            ctx.fillText('💎 Jaciara Acessórios', canvas.width / 2, size + 40);
+            ctx.fillText('💎 Jaciara Acessórios', canvas.width / 2, baseCanvasHeight + 40);
             ctx.font = '22px Roboto';
-            ctx.fillText('Aceito Encomendas!', canvas.width / 2, size + 70);
+            ctx.fillText('Aceito Encomendas!', canvas.width / 2, baseCanvasHeight + 70);
             ctx.font = '18px Roboto';
-            ctx.fillText('📱 WhatsApp: 22 99963-1760', canvas.width / 2, size + 95);
-            ctx.fillText('📸 Instagram: @JACIARA_ACESSORIOS', canvas.width / 2, size + 120);
+            ctx.fillText('📱 WhatsApp: 22 99963-1760', canvas.width / 2, baseCanvasHeight + 95);
+            ctx.fillText('📸 Instagram: @JACIARA_ACESSORIOS', canvas.width / 2, baseCanvasHeight + 120);
 
             const description = descriptionInput.value.trim();
             if (description) {
                 const words = description.split(' ');
                 let line = '';
                 lines = [];
+                calculatedMaxWidth = newWidth * (maxDescriptionWidthPercentage / 100);
                 const maxWidth = calculatedMaxWidth;
                 maxLineWidth = 0;
 
-                ctx.font = `italic ${descFontSize}px "${descFontFamily}", serif`;
+                ctx.font = `${descFontSize}px "${descFontFamily}", serif`;
                 ctx.fillStyle = descCorInput.value;
                 ctx.textAlign = 'center';
-                ctx.shadowColor = 'rgba(0,0,0,0.6)';
-                ctx.shadowOffsetX = 2;
-                ctx.shadowOffsetY = 2;
-                ctx.shadowBlur = 4;
+                ctx.shadowColor = 'rgba(0,0,0,0.3)';
+                ctx.shadowOffsetX = 1;
+                ctx.shadowOffsetY = 1;
+                ctx.shadowBlur = 2;
 
                 words.forEach(word => {
-                    const width = ctx.measureText(line + word).width;
-                    if (width < maxWidth) {
-                        line += word + ' ';
+                    const testLine = line + word + ' ';
+                    const metrics = ctx.measureText(testLine);
+                    const testWidth = metrics.width;
+                    if (testWidth < maxWidth) {
+                        line = testLine;
                     } else {
                         lines.push(line.trim());
                         line = word + ' ';
@@ -406,7 +567,11 @@
                 lines.push(line.trim());
 
                 let y = descPos.y;
-                lines.forEach((text, index) => {
+                lines.forEach((text) => {
+                    ctx.fillStyle = `rgba(0, 0, 0, 0.08)`; // Fundo semi-transparente ainda mais claro
+                    const textMetrics = ctx.measureText(text);
+                    ctx.fillRect(descPos.x - textMetrics.width / 2 - 5, y - descFontSize * lineHeight + 2, textMetrics.width + 10, descFontSize * lineHeight - 4);
+                    ctx.fillStyle = descCorInput.value;
                     ctx.fillText(text, descPos.x, y);
                     const textWidth = ctx.measureText(text).width;
                     if (textWidth > maxLineWidth) {
@@ -418,15 +583,20 @@
 
             const valor = valorInput.value.trim();
             if (valor) {
-                ctx.font = `bold ${valorFontSize}px "Poppins", sans-serif`;
+                ctx.font = `bold ${valorFontSize}px "Roboto", sans-serif`;
                 ctx.fillStyle = valorCorInput.value;
                 ctx.textAlign = 'center';
+                ctx.shadowColor = 'rgba(0,0,0,0.3)';
+                ctx.shadowOffsetX = 1;
+                ctx.shadowOffsetY = 1;
+                ctx.shadowBlur = 2;
                 ctx.fillText(`R$ ${valor}`, valorPos.x, valorPos.y);
             }
 
             if (logoImg) {
-                const size = 120;
-                ctx.drawImage(logoImg, canvas.width - size - 20, 20, size, size);
+                const logoSize = 120;
+                ctx.shadowBlur = 0;
+                ctx.drawImage(logoImg, canvas.width - logoSize - 25, 25, logoSize, logoSize);
             }
         }
 
@@ -453,17 +623,26 @@
         });
 
         img.onload = () => drawCanvas();
+        document.addEventListener('DOMContentLoaded', drawCanvas);
 
-        function isInsideText(x, y, textX, textY, fontSize, text) {
-            const width = ctx.measureText(text).width;
-            const height = fontSize * lineHeight;
-            return (
-                x >= textX - width / 2 &&
-                x <= textX + width / 2 &&
-                y >= textY - height &&
-                y <= textY
-            );
+
+        function isInsideText(x, y, textX, textY, fontSize, text, isDescription = false) {
+            ctx.save();
+            ctx.font = isDescription ? `${fontSize}px "${descFontFamily}", serif` : `bold ${fontSize}px "Roboto", sans-serif`;
+
+            const metrics = ctx.measureText(text);
+            const actualWidth = metrics.width;
+            const actualHeight = fontSize * lineHeight;
+
+            const left = textX - actualWidth / 2;
+            const right = textX + actualWidth / 2;
+            const top = textY - actualHeight;
+            const bottom = textY;
+
+            ctx.restore();
+            return x >= left && x <= right && y >= top && y <= bottom;
         }
+
 
         function getTouchPos(canvas, evt) {
             const rect = canvas.getBoundingClientRect();
@@ -495,25 +674,29 @@
             const pos = getTouchPos(canvas, evt);
             const description = descriptionInput.value.trim();
             const valor = valorInput.value.trim();
-            let i = 0;
+
             if (lines.length > 0) {
                 let y = descPos.y;
-                for (i = 0; i < lines.length; i++) {
+                for (let i = 0; i < lines.length; i++) {
+                    ctx.font = `${descFontSize}px "${descFontFamily}", serif`;
                     let textWidth = ctx.measureText(lines[i]).width;
+
                     let textXStart = descPos.x - textWidth / 2;
                     let textXEnd = descPos.x + textWidth / 2;
                     let textYStart = y - descFontSize * lineHeight;
                     let textYEnd = y;
+
                     if (pos.x >= textXStart && pos.x <= textXEnd && pos.y >= textYStart && pos.y <= textYEnd) {
                         dragging = 'desc';
                         dragOffset.x = pos.x - descPos.x;
-                        dragOffset.y = pos.y - y;
+                        dragOffset.y = pos.y - descPos.y;
                         break;
                     }
                     y += descFontSize * lineHeight;
                 }
             }
-            if (dragging !== 'desc' && valor && isInsideText(pos.x, pos.y, valorPos.x, valorPos.y, 40, `R$ ${valor}`)) {
+
+            if (dragging !== 'desc' && valor && isInsideText(pos.x, pos.y, valorPos.x, valorPos.y, valorFontSize, `R$ ${valor}`, false)) {
                 dragging = 'valor';
                 dragOffset.x = pos.x - valorPos.x;
                 dragOffset.y = pos.y - valorPos.y;
@@ -544,11 +727,12 @@
         faixaTextoCorInput.addEventListener('input', () => drawCanvas());
         descCorInput.addEventListener('input', () => drawCanvas());
         valorCorInput.addEventListener('input', () => drawCanvas());
+
         faixaWidthInput.addEventListener('input', () => {
             faixaWidthPercentage = parseInt(faixaWidthInput.value);
-            calculatedMaxWidth = newWidth * (faixaWidthPercentage / 100);
             drawCanvas();
         });
+
         descFontSizeInput.addEventListener('input', () => {
             descFontSize = parseInt(descFontSizeInput.value);
             drawCanvas();
@@ -566,7 +750,6 @@
 
         descriptionWidthPercentageInput.addEventListener('input', () => {
             maxDescriptionWidthPercentage = parseInt(descriptionWidthPercentageInput.value);
-            calculatedMaxWidth = newWidth * (maxDescriptionWidthPercentage / 100);
             drawCanvas();
         });
 
@@ -580,9 +763,9 @@
         function copyDescription() {
             const text = descriptionInput.value.trim();
             if (text) {
-                navigator.clipboard.writeText(text).then(() => alert('Descrição copiada!'));
+                navigator.clipboard.writeText(text).then(() => alert('Descrição copiada para a área de transferência!'));
             } else {
-                alert('Descrição vazia.');
+                alert('A descrição está vazia. Nada para copiar.');
             }
         }
 
