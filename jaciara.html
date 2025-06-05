@@ -28,7 +28,7 @@
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            padding: 30px;
+            padding: 15px; /* Reduzindo o padding geral em telas menores */
             color: var(--text-dark);
             box-sizing: border-box;
             line-height: 1.7;
@@ -36,14 +36,14 @@
 
         .card {
             background: var(--card-background);
-            border-radius: 12px; /* Bordas mais arredondadas */
-            box-shadow: 0 8px 25px var(--card-shadow); /* Sombra mais suave */
-            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px var(--card-shadow);
+            padding: 25px; /* Reduzindo o padding do card */
             width: 100%;
-            max-width: 760px;
+            max-width: 100%; /* O card ocupa toda a largura em telas menores */
             display: grid;
             grid-template-columns: 1fr;
-            gap: 35px;
+            gap: 25px; /* Reduzindo o gap */
             box-sizing: border-box;
             border: 1px solid var(--border-color);
         }
@@ -51,18 +51,18 @@
         h2 {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
-            font-size: 38px;
+            font-size: 30px; /* Reduzindo o tamanho do título */
             color: var(--primary-color);
-            margin-bottom: 25px;
+            margin-bottom: 15px; /* Reduzindo a margem inferior */
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 18px;
+            gap: 12px;
             text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
         }
 
         h2 .diamond-icon {
-            font-size: 44px;
+            font-size: 36px; /* Reduzindo o tamanho do ícone */
             color: var(--primary-color);
             line-height: 1;
         }
@@ -70,294 +70,164 @@
         h3 {
             font-family: 'Roboto', sans-serif;
             font-weight: 600;
-            font-size: 22px;
+            font-size: 18px; /* Reduzindo o tamanho do subtítulo */
             color: var(--text-dark);
-            margin-top: 25px;
-            margin-bottom: 18px;
+            margin-top: 18px; /* Reduzindo a margem superior */
+            margin-bottom: 12px; /* Reduzindo a margem inferior */
             text-align: left;
             width: 100%;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 15px;
-            letter-spacing: 0.6px;
+            border-bottom: 1.5px solid var(--border-color);
+            padding-bottom: 10px;
+            letter-spacing: 0.5px;
         }
 
         p {
-            font-size: 16px;
+            font-size: 15px; /* Reduzindo o tamanho do texto */
             color: var(--text-medium);
             text-align: left;
             width: 100%;
-            margin-bottom: 22px;
+            margin-bottom: 18px;
         }
 
         label {
             font-weight: 500;
-            font-size: 15px;
+            font-size: 14px;
             color: var(--text-dark);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: block;
             text-align: left;
             width: 100%;
         }
 
         input[type='file'] {
-            padding: 14px;
+            padding: 12px; /* Reduzindo o padding do input de arquivo */
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            background-color: #FFFFFF; /* Branco para o input */
+            background-color: #FFFFFF;
             color: var(--text-dark);
             cursor: pointer;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        input[type='file']:hover {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px var(--focus-shadow);
+            font-size: 14px;
         }
 
         input[type='file']::file-selector-button {
-            background-color: var(--primary-color);
-            color: var(--text-dark);
-            border: none;
-            padding: 11px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.1s ease;
-            font-size: 15px;
-            font-weight: 600;
-            margin-right: 16px;
-        }
-
-        input[type='file']::file-selector-button:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-1px);
+            padding: 8px 14px; /* Reduzindo o padding do botão de seleção */
+            font-size: 14px;
+            margin-right: 10px;
         }
 
         input[type='number'],
         input[type='color'],
         textarea,
         select {
-            padding: 12px 18px;
-            font-size: 16px;
+            padding: 10px 14px; /* Reduzindo o padding dos inputs */
+            font-size: 14px;
             border-radius: 8px;
             border: 1px solid var(--border-color);
             width: 100%;
             box-sizing: border-box;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            background-color: #FFFFFF; /* Branco para os inputs */
+            background-color: #FFFFFF;
             color: var(--text-dark);
         }
 
-        input[type='number']:focus,
-        input[type='color']:focus,
-        textarea:focus,
-        select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px var(--focus-shadow);
-        }
-
         textarea {
-            min-height: 120px;
-            resize: vertical;
+            min-height: 100px; /* Reduzindo a altura mínima do textarea */
         }
 
         .buttons {
             display: flex;
             justify-content: flex-start;
-            gap: 18px;
-            margin-top: 20px;
-            margin-bottom: 30px;
+            gap: 10px; /* Reduzindo o gap entre os botões */
+            margin-top: 15px; /* Reduzindo a margem superior */
+            margin-bottom: 20px; /* Reduzindo a margem inferior */
             flex-wrap: wrap;
         }
 
         button {
-            padding: 10px 16px; /* Reduzindo um pouco o padding */
-            background-color: var(--primary-color);
-            border: none;
-            color: var(--text-dark);
-            font-size: 14px; /* Reduzindo um pouco a fonte */
-            font-weight: 500; /* Deixando um pouco mais leve */
-            border-radius: 6px; /* Mais arredondamento */
-            cursor: pointer;
-            min-width: 80px; /* Ajustando a largura mínima */
-            box-sizing: border-box;
-            transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.3s ease;
-            box-shadow: 0 3px 8px rgba(247, 206, 225, 0.5); /* Sombra rosa suave */
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-        }
-
-        button:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-1px);
-            box-shadow: 0 5px 12px rgba(247, 206, 225, 0.7);
-        }
-
-        button:active {
-            transform: translateY(0);
-            box-shadow: 0 1px 3px rgba(247, 206, 225, 0.3);
+            padding: 8px 12px; /* Reduzindo o padding dos botões */
+            font-size: 14px;
+            min-width: 70px; /* Reduzindo a largura mínima dos botões */
         }
 
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px; /* Reduzindo a margem inferior */
         }
 
         .valor-container {
-            margin-top: 20px;
-            background-color: #FFFFFF; /* Branco para o container do valor */
-            color: var(--primary-color);
-            padding: 28px;
-            border-radius: 12px; /* Mais arredondado */
-            font-size: 28px;
-            font-weight: 700;
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            box-sizing: border-box;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* Sombra suave */
-            border: 1px solid var(--border-color); /* Borda lilás clara */
+            padding: 20px; /* Reduzindo o padding do container de valor */
+            font-size: 24px; /* Reduzindo o tamanho da fonte do valor */
+            gap: 10px; /* Reduzindo o gap */
         }
 
         .valor-container label {
-            color: var(--text-dark);
-            font-size: 15px;
-            font-weight: 500;
-        }
-
-        .valor-container input {
-            background-color: #F8F0F4; /* Fundo rosa claro para o input do valor */
-            border: 1px solid var(--border-color);
-            color: var(--primary-color);
-            font-weight: 600;
-            padding: 11px 16px;
-            border-radius: 6px;
-        }
-
-        .valor-container input::placeholder {
-            color: #AAAAAA;
+            font-size: 14px;
         }
 
         .color-picker-group,
         .font-size-group,
         .font-family-group,
         .slide-group {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 8px; /* Reduzindo o gap */
+            margin-bottom: 15px; /* Reduzindo a margem inferior */
         }
 
         input[type='color'] {
-            height: 30px; /* Reduzindo a altura */
-            padding: 5px;
-            border-radius: 6px; /* Mais arredondado */
-            border: 1px solid var(--border-color); /* Borda lilás clara */
-            width: 50px; /* Ajustando a largura */
-        }
-
-        input[type='number']#descFontSize {
-            padding: 6px;
-            font-size: 14px;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            background-color: #FFFFFF;
-            color: var(--text-dark);
-            width: 50px;
+            height: 30px;
+            padding: 4px;
+            width: 40px;
         }
 
         input[type='range'] {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 8px;
-            background: var(--border-color); /* Lilás claro para o range */
-            border-radius: 4px;
-            outline: none;
-            opacity: 0.9;
-            transition: opacity 0.2s;
+            height: 6px; /* Reduzindo a altura do range */
         }
 
-        input[type='range']::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--primary-color);
-            cursor: pointer;
-            box-shadow: 0 2px 6px rgba(247, 206, 225, 0.6); /* Sombra rosa */
-            margin-top: -6px;
-            transition: background-color 0.2s ease, transform 0.1s ease;
-        }
-
-        input[type='range']::-webkit-slider-thumb:hover {
-            background-color: var(--primary-dark);
-            transform: scale(1.05);
-        }
-
+        input[type='range']::-webkit-slider-thumb,
         input[type='range']::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--primary-color);
-            cursor: pointer;
-            box-shadow: 0 2px 6px rgba(247, 206, 225, 0.6); /* Sombra rosa */
-        }
-        input[type='range']::-moz-range-thumb:hover {
-            background-color: var(--primary-dark);
+            width: 16px; /* Reduzindo o tamanho do thumb */
+            height: 16px; /* Reduzindo o tamanho do thumb */
+            margin-top: -5px;
         }
 
         canvas {
-            margin-top: 30px;
-            max-width: 100%;
-            border-radius: 12px; /* Mais arredondado */
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            touch-action: none;
-            border: 1px solid var(--border-color); /* Borda lilás clara */
-            box-sizing: border-box;
+            margin-top: 20px; /* Reduzindo a margem superior */
+            border-radius: 10px;
         }
 
         #downloadBtn {
-            margin-top: 30px;
+            margin-top: 20px; /* Reduzindo a margem superior */
+            padding: 10px 20px; /* Reduzindo o padding do botão de download */
+            font-size: 14px;
+            min-width: auto;
         }
 
         .description-controls {
-            display: flex;
-            align-items: center;
-            margin-top: 8px;
-            margin-bottom: 10px;
+            margin-top: 5px;
+            margin-bottom: 8px;
         }
 
         .description-controls button {
-            margin-right: 10px;
-            padding: 8px 14px;
+            padding: 6px 10px;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+
+        .font-family-group label,
+        .font-size-group label,
+        .color-picker-group label {
             font-size: 14px;
-            min-width: auto;
-            border-radius: 6px; /* Mais arredondado */
-            background-color: var(--primary-color);
-            color: var(--text-dark);
-            border: 1px solid var(--border-color);
-            text-align: center;
-            line-height: 1;
-            text-decoration: none; /* Remover sublinhado de links */
-        }
-         .description-controls button:hover {
-            background-color: var(--primary-dark);
+            margin-bottom: 5px;
         }
 
-        .description-controls button:first-child {
-            margin-left: 0;
+        #descFontFamily {
+            padding: 6px 10px;
+            font-size: 14px;
+            width: 100%; /* A fonte ocupa toda a largura */
         }
 
-        .font-size-group {
-            margin-bottom: 0 !important;
-        }
-
-        .color-picker-group {
-            margin-bottom: 0 !important;
+        .valor-container input {
+            padding: 8px 12px;
+            font-size: 18px;
         }
     </style>
 </head>
@@ -379,71 +249,71 @@
             <div class="description-controls">
                 <button type="button" onclick="copyDescription()">📋 Copiar</button>
                 <button type="button" onclick="clearDescription()">🧹 Limpar</button>
-                <span style="display: inline-flex; align-items: center; justify-content: center; margin-left: 10px; padding: 6px 10px; font-size: 14px; min-width: auto; border-radius: 6px; background-color: var(--primary-color); color: var(--text-dark); border: 1px solid var(--border-color);">
-                    <label for="descFontSize" style="margin-bottom: 0; margin-right: 5px; font-size: 14px;">Tam:</label>
+                <span style="display: inline-flex; align-items: center; justify-content: center; margin-left: 5px; padding: 4px 8px; font-size: 12px; border-radius: 4px; background-color: var(--primary-color); color: var(--text-dark); border: 1px solid var(--border-color);">
+                    <label for="descFontSize" style="margin-bottom: 0; margin-right: 3px; font-size: 12px;">Tam:</label>
                     <input type="number" id="descFontSize" value="36" min="12" max="72">
                 </span>
-                <span style="display: inline-flex; align-items: center; justify-content: center; margin-left: 10px; padding: 6px 10px; font-size: 14px; min-width: auto; border-radius: 6px; background-color: var(--primary-color); color: var(--text-dark); border: 1px solid var(--border-color);">
-                    <label for="descCor" style="margin-bottom: 0; margin-right: 5px; font-size: 14px;">Cor:</label>
+                <span style="display: inline-flex; align-items: center; justify-content: center; margin-left: 5px; padding: 4px 8px; font-size: 12px; border-radius: 4px; background-color: var(--primary-color); color: var(--text-dark); border: 1px solid var(--border-color);">
+                    <label for="descCor" style="margin-bottom: 0; margin-right: 3px; font-size: 12px;">Cor:</label>
                     <input type="color" id="descCor" value="#FFFFFF">
                 </span>
-                <div class="font-family-group" style="margin-left: 15px;">
-                    <label for="descFontFamily" style="margin-bottom: 0; font-size: 14px;">Fonte:</label>
-                    <select id="descFontFamily" style="padding: 6px 10px; font-size: 14px; border-radius: 6px; border: 1px solid var(--border-color); background-color: #FFFFFF; color: var(--text-dark); width: 180px;">
-                        <option value="Playfair Display">Playfair Display (Serif)</option>
+                <div class="font-family-group" style="margin-left: 8px;">
+                    <label for="descFontFamily" style="margin-bottom: 3px; font-size: 12px;">Fonte:</label>
+                    <select id="descFontFamily">
+                        <option value="Playfair Display">Playfair Display</option>
                         <option value="Roboto">Roboto</option>
-                        <option value="Inter">Inter (Sans-serif)</option>
-                        <option value="EB Garamond">EB Garamond (Clássica)</option>
+                        <option value="Inter">Inter</option>
+                        <option value="EB Garamond">EB Garamond</option>
                         <option value="Poppins">Poppins</option>
                     </select>
                 </div>
             </div>
         </div>
 
-        <h3 style="margin-top: 30px;">3. Preço e Identidade</h3>
+        <h3 style="margin-top: 20px;">3. Preço e Identidade</h3>
         <div class="valor-container input-group">
             <label for="valor">Defina o valor do produto (apenas números, ex: 99.99):</label>
             <input type="number" id="valor" placeholder="Ex: 99.99" step="0.01" />
-            <div style="display: flex; align-items: center; gap: 20px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
                 <div class="font-size-group">
-                    <label for="valorFontSize">Tamanho da Fonte do Valor:</label>
-                    <input type="number" id="valorFontSize" value="40" min="12" max="72">
+                    <label for="valorFontSize">Tam:</label>
+                    <input type="number" id="valorFontSize" value="40" min="12" max="72" style="width: 60px;">
                 </div>
                 <div class="color-picker-group">
-                    <label for="valorCor">Cor do Texto do Valor:</label>
-                    <input type="color" id="valorCor" value="#DAA520" />
+                    <label for="valorCor">Cor:</label>
+                    <input type="color" id="valorCor" value="#DAA520" style="width: 40px; height: 30px;">
                 </div>
             </div>
         </div>
 
         <div class="input-group">
-            <label for="logoUpload">Faça o upload da sua logo (recomendamos PNG transparente para um toque profissional):</label>
+            <label for="logoUpload">Faça o upload da sua logo:</label>
             <input type="file" id="logoUpload" accept="image/png" />
         </div>
 
         <h3>4. Ajustes Visuais Finos</h3>
-        <div style="display: flex; align-items: center; gap: 20px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
             <div class="color-picker-group input-group">
-                <label for="fundoCor">Cor da Faixa Inferior:</label>
+                <label for="fundoCor">Fundo Faixa:</label>
                 <input type="color" id="fundoCor" value="#000000" />
             </div>
             <div class="color-picker-group input-group">
-                <label for="faixaTextoCor">Cor do Texto da Faixa Inferior:</label>
+                <label for="faixaTextoCor">Texto Faixa:</label>
                 <input type="color" id="faixaTextoCor" value="#ffffff" />
             </div>
         </div>
 
         <div class="slide-group input-group">
-            <label for="faixaWidth">Largura da Faixa Inferior (% da imagem):</label>
+            <label for="faixaWidth">Largura Faixa (%):</label>
             <input type="range" id="faixaWidth" min="0" max="100" value="100">
         </div>
         <div class="slide-group input-group">
-            <label for="descriptionWidthPercentage">Largura da Descrição (% da imagem):</label>
+            <label for="descriptionWidthPercentage">Largura Descrição (%):</label>
             <input type="range" id="descriptionWidthPercentage" min="10" max="100" value="80">
         </div>
 
         <canvas id="canvas"></canvas>
-        <button id="downloadBtn">📥 Baixar Imagem Personalizada</button>
+        <button id="downloadBtn">📥 Baixar Imagem</button>
     </div>
 
     <script>
@@ -482,6 +352,7 @@
         let newWidth = 0;
         let newHeight = 0;
 
+
         let dragging = null;
         let dragOffset = { x: 0, y: 0 };
 
@@ -495,12 +366,13 @@
         function drawCanvas() {
             const baseCanvasWidth = 1000;
             const baseCanvasHeight = 1000;
-            const extraHeight = 140;
+            const extraHeight = 140; // Altura da faixa inferior
 
             canvas.width = baseCanvasWidth;
             canvas.height = baseCanvasHeight + extraHeight;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+            // Desenha a imagem principal
             if (img.src) {
                 const scale = Math.min(baseCanvasWidth / img.width, baseCanvasHeight / img.height);
                 imageScale = scale;
@@ -511,6 +383,7 @@
                 const yOffset = (baseCanvasHeight - newHeight) / 2;
                 ctx.drawImage(img, xOffset, yOffset, newWidth, newHeight);
             } else {
+                // Placeholder se nenhuma imagem for carregada
                 ctx.fillStyle = '#f0f0f0';
                 ctx.fillRect(0, 0, baseCanvasWidth, baseCanvasHeight);
                 ctx.fillStyle = '#cccccc';
@@ -519,15 +392,17 @@
                 ctx.fillText('Envie uma imagem para começar!', baseCanvasWidth / 2, baseCanvasHeight / 2);
             }
 
+            // Desenha a faixa inferior
             const faixaWidth = baseCanvasWidth * (faixaWidthPercentage / 100);
             const faixaX = (baseCanvasWidth - faixaWidth) / 2;
             ctx.globalAlpha = 1.0;
-            ctx.shadowBlur = 0;
-            ctx.fillStyle = hexToRGBA(fundoCorInput.value, 0.85);
+            ctx.shadowBlur = 0; // Remove sombra da faixa para um visual mais limpo
+            ctx.fillStyle = hexToRGBA(fundoCorInput.value, 0.85); // Levemente mais opaco
             ctx.fillRect(faixaX, baseCanvasHeight, faixaWidth, extraHeight);
 
+            // Texto da faixa inferior
             ctx.fillStyle = faixaTextoCorInput.value;
-            ctx.font = 'bold 28px Roboto';
+            ctx.font = 'bold 28px Roboto'; /* Usar Inter para a faixa */
             ctx.textAlign = 'center';
             ctx.fillText('💎 Jaciara Acessórios', canvas.width / 2, baseCanvasHeight + 40);
             ctx.font = '22px Roboto';
@@ -536,6 +411,7 @@
             ctx.fillText('📱 WhatsApp: 22 99963-1760', canvas.width / 2, baseCanvasHeight + 95);
             ctx.fillText('📸 Instagram: @JACIARA_ACESSORIOS', canvas.width / 2, baseCanvasHeight + 120);
 
+            // Desenha a descrição
             const description = descriptionInput.value.trim();
             if (description) {
                 const words = description.split(' ');
@@ -545,10 +421,10 @@
                 const maxWidth = calculatedMaxWidth;
                 maxLineWidth = 0;
 
-                ctx.font = `${descFontSize}px "${descFontFamily}", serif`;
+                ctx.font = `${descFontSize}px "${descFontFamily}", serif`; /* Ajustado para a nova fonte da descrição */
                 ctx.fillStyle = descCorInput.value;
                 ctx.textAlign = 'center';
-                ctx.shadowColor = 'rgba(0,0,0,0.3)';
+                ctx.shadowColor = 'rgba(0,0,0,0.3)'; // Sombra mais sutil
                 ctx.shadowOffsetX = 1;
                 ctx.shadowOffsetY = 1;
                 ctx.shadowBlur = 2;
@@ -568,7 +444,7 @@
 
                 let y = descPos.y;
                 lines.forEach((text) => {
-                    ctx.fillStyle = `rgba(0, 0, 0, 0.08)`; // Fundo semi-transparente ainda mais claro
+                    ctx.fillStyle = `rgba(0, 0, 0, 0.08)`; // Fundo semi-transparente mais claro
                     const textMetrics = ctx.measureText(text);
                     ctx.fillRect(descPos.x - textMetrics.width / 2 - 5, y - descFontSize * lineHeight + 2, textMetrics.width + 10, descFontSize * lineHeight - 4);
                     ctx.fillStyle = descCorInput.value;
@@ -581,21 +457,23 @@
                 });
             }
 
+            // Desenha o valor
             const valor = valorInput.value.trim();
             if (valor) {
-                ctx.font = `bold ${valorFontSize}px "Roboto", sans-serif`;
+                ctx.font = `bold ${valorFontSize}px "Roboto", sans-serif`; /* Usar Inter para o valor */
                 ctx.fillStyle = valorCorInput.value;
                 ctx.textAlign = 'center';
-                ctx.shadowColor = 'rgba(0,0,0,0.3)';
+                ctx.shadowColor = 'rgba(0,0,0,0.3)'; // Sombra mais sutil
                 ctx.shadowOffsetX = 1;
                 ctx.shadowOffsetY = 1;
                 ctx.shadowBlur = 2;
                 ctx.fillText(`R$ ${valor}`, valorPos.x, valorPos.y);
             }
 
+            // Desenha a logo
             if (logoImg) {
                 const logoSize = 120;
-                ctx.shadowBlur = 0;
+                ctx.shadowBlur = 0; // Remove sombra da logo
                 ctx.drawImage(logoImg, canvas.width - logoSize - 25, 25, logoSize, logoSize);
             }
         }
@@ -627,7 +505,7 @@
 
 
         function isInsideText(x, y, textX, textY, fontSize, text, isDescription = false) {
-            ctx.save();
+            ctx.save(); // Salva o estado atual do contexto
             ctx.font = isDescription ? `${fontSize}px "${descFontFamily}", serif` : `bold ${fontSize}px "Roboto", sans-serif`;
 
             const metrics = ctx.measureText(text);
@@ -639,7 +517,7 @@
             const top = textY - actualHeight;
             const bottom = textY;
 
-            ctx.restore();
+            ctx.restore(); // Restaura o estado para não afetar o desenho principal
             return x >= left && x <= right && y >= top && y <= bottom;
         }
 
