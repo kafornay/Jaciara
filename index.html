@@ -49,49 +49,33 @@
       transition: 0.2s;
     }
 
-    input:focus, textarea:focus {
-      border-color: var(--accent-color);
-      outline: none;
+    .preview-box {
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 15px;
+      margin-top: 10px;
+      display: none;
+      background-color: #fff9fc;
     }
 
-    button {
-      background-color: var(--accent-color);
-      color: white;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #d16688;
-    }
-
-    .whatsapp-button,
-    .telegram-button {
-      display: inline-flex;
-      align-items: center;
-      background-color: #25D366;
-      color: white;
-      border: none;
-      padding: 10px 16px;
+    .preview-box img {
+      width: 100px;
       border-radius: 10px;
-      font-weight: 600;
-      text-decoration: none;
-      margin: 5px 5px 0 0;
-      transition: background 0.3s;
+      float: left;
+      margin-right: 10px;
     }
 
-    .telegram-button {
-      background-color: #0088cc;
+    .preview-box h4 {
+      margin: 0;
+      color: #e07a9c;
     }
 
-    .whatsapp-button:hover {
-      background-color: #1ebe5d;
+    .preview-box p {
+      font-size: 0.9em;
+      color: #555;
     }
 
-    .telegram-button:hover {
-      background-color: #0077b6;
-    }
+    .clear { clear: both; }
 
     .toast {
       position: fixed;
@@ -101,7 +85,6 @@
       color: white;
       padding: 10px 20px;
       border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
       animation: fadeInOut 3s ease-in-out;
     }
 
@@ -111,66 +94,26 @@
       90% { opacity: 1; }
       100% { opacity: 0; transform: translateY(20px); }
     }
-
-    .dark-mode {
-      background-color: var(--dark-bg);
-      color: var(--dark-text);
-    }
-
-    .dark-mode .container {
-      background-color: #3a3a3a;
-      color: var(--dark-text);
-    }
-
-    .dark-mode input,
-    .dark-mode textarea {
-      background-color: #2a2a2a;
-      color: var(--dark-text);
-      border: 1px solid #666;
-    }
-
-    .copiado {
-      background-color: #fbe4ec !important;
-    }
-
-    .historico-item {
-      border: 1px dashed #ccc;
-      padding: 10px;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      background-color: #fff9fc;
-    }
-
-    iframe#preview {
-      width: 100%;
-      height: 400px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      margin-top: 10px;
-      display: none;
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 20px 15px;
-      }
-
-      input, textarea, button {
-        font-size: 14px;
-      }
-    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Gerador de Links Shopee 💖</h1>
+
     <label for="codigo">Código de Afiliado:</label>
     <input type="text" id="codigo" placeholder="Ex: GABY123" />
-    <label><input type="checkbox" id="lembrar"> Lembrar meu código</label>
 
     <label for="link">Link do Produto:</label>
     <input type="text" id="link" placeholder="Cole o link da Shopee aqui" />
-    <iframe id="preview"></iframe>
+
+    <div id="preview" class="preview-box">
+      <img id="preview-img" src="" alt="Imagem do produto" />
+      <div>
+        <h4 id="preview-title"></h4>
+        <p id="preview-desc"></p>
+        <div class="clear"></div>
+      </div>
+    </div>
 
     <label for="mensagem">Mensagem para WhatsApp:</label>
     <textarea id="mensagem" placeholder="Ex: Confira essa oferta imperdível! 👀"></textarea>
@@ -178,54 +121,37 @@
     <button onclick="gerarLink()">Gerar Link Afiliado</button>
 
     <div id="resultado" style="margin-top: 20px;"></div>
-
-    <h3>Histórico</h3>
-    <input type="text" id="filtro" placeholder="Filtrar histórico..." oninput="filtrarHistorico()">
-    <div id="historico"></div>
-    <button onclick="limparHistorico()">🗑️ Limpar Histórico</button>
-
-    <label><input type="checkbox" id="modoEscuro"> Ativar modo escuro</label>
   </div>
 
   <script>
     const codigoInput = document.getElementById('codigo');
-    const lembrarCheckbox = document.getElementById('lembrar');
-    const historicoDiv = document.getElementById('historico');
-    const modoEscuroCheckbox = document.getElementById('modoEscuro');
     const mensagemInput = document.getElementById('mensagem');
     const linkInput = document.getElementById('link');
-    const previewFrame = document.getElementById('preview');
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const salvo = localStorage.getItem("codigoAfiliado");
-      if (salvo) {
-        codigoInput.value = salvo;
-        lembrarCheckbox.checked = true;
-        notificar("Código de afiliado carregado!");
-      }
-      carregarHistorico();
-    });
-
-    lembrarCheckbox.addEventListener("change", () => {
-      if (lembrarCheckbox.checked) {
-        localStorage.setItem("codigoAfiliado", codigoInput.value);
-      } else {
-        localStorage.removeItem("codigoAfiliado");
-      }
-    });
-
-    modoEscuroCheckbox.addEventListener("change", () => {
-      document.body.classList.toggle("dark-mode");
-    });
+    const previewBox = document.getElementById('preview');
+    const previewImg = document.getElementById('preview-img');
+    const previewTitle = document.getElementById('preview-title');
+    const previewDesc = document.getElementById('preview-desc');
+    const API_KEY = "02c58547ee8c03a9329370f4256a58a2";
 
     linkInput.addEventListener("input", () => {
       const url = linkInput.value.trim();
-      if (url.startsWith("http")) {
-        previewFrame.src = url;
-        previewFrame.style.display = "block";
-      } else {
-        previewFrame.style.display = "none";
+      if (!url.startsWith("http")) {
+        previewBox.style.display = "none";
+        return;
       }
+
+      fetch(`https://api.linkpreview.net/?key=${API_KEY}&q=${encodeURIComponent(url)}`)
+        .then(res => res.json())
+        .then(data => {
+          previewImg.src = data.image;
+          previewTitle.textContent = data.title;
+          previewDesc.textContent = data.description;
+          previewBox.style.display = "block";
+        })
+        .catch(() => {
+          previewBox.style.display = "none";
+          notificar("Não foi possível carregar a pré-visualização.");
+        });
     });
 
     function gerarLink() {
@@ -236,40 +162,14 @@
 
       const novoLink = link.includes('?') ? `${link}&af_id=${codigo}` : `${link}?af_id=${codigo}`;
       const whatsLink = `https://wa.me/?text=${encodeURIComponent(mensagem + '\n' + novoLink)}`;
-      const telegramLink = `https://t.me/share/url?url=${encodeURIComponent(novoLink)}&text=${encodeURIComponent(mensagem)}`;
 
-      const item = document.createElement("div");
-      item.className = "historico-item";
-      item.innerHTML = `
-        <strong>Link Afiliado:</strong><br>
-        <input type="text" value="${novoLink}" readonly onclick="this.select()">
-        <button onclick="copiarTexto(this)">📋 Copiar Link</button>
-        <button onclick="copiarMensagem(this)">📋 Copiar Mensagem</button><br>
-        <a href="${whatsLink}" target="_blank" class="whatsapp-button">📲 WhatsApp</a>
-        <a href="${telegramLink}" target="_blank" class="telegram-button">📨 Telegram</a>
+      document.getElementById("resultado").innerHTML = `
+        <p><strong>Link Gerado:</strong></p>
+        <input type="text" value="${novoLink}" onclick="this.select()" readonly />
+        <p><a href="${whatsLink}" target="_blank">📲 Enviar pelo WhatsApp</a></p>
       `;
-      historicoDiv.prepend(item);
 
-      salvarHistorico(link, novoLink);
       notificar("Link gerado com sucesso!");
-    }
-
-    function copiarTexto(btn) {
-      const input = btn.previousElementSibling;
-      input.select();
-      document.execCommand("copy");
-      input.classList.add("copiado");
-      setTimeout(() => input.classList.remove("copiado"), 300);
-      notificar("Link copiado!");
-    }
-
-    function copiarMensagem(btn) {
-      const div = btn.parentElement;
-      const input = div.querySelector("input");
-      const mensagem = mensagemInput.value.trim() || "Confira esta oferta incrível!";
-      const texto = `${mensagem}\n${input.value}`;
-      navigator.clipboard.writeText(texto);
-      notificar("Mensagem copiada!");
     }
 
     function notificar(msg) {
@@ -278,45 +178,6 @@
       toast.textContent = msg;
       document.body.appendChild(toast);
       setTimeout(() => toast.remove(), 3000);
-    }
-
-    function salvarHistorico(original, afiliado) {
-      let h = JSON.parse(localStorage.getItem("historicoLinks") || "[]");
-      h.unshift({ original, afiliado });
-      localStorage.setItem("historicoLinks", JSON.stringify(h));
-    }
-
-    function carregarHistorico() {
-      historicoDiv.innerHTML = "";
-      let h = JSON.parse(localStorage.getItem("historicoLinks") || "[]");
-      h.forEach(({ original, afiliado }) => {
-        const item = document.createElement("div");
-        item.className = "historico-item";
-        item.innerHTML = `
-          <strong>Link Afiliado:</strong><br>
-          <input type="text" value="${afiliado}" readonly onclick="this.select()">
-          <button onclick="copiarTexto(this)">📋 Copiar</button>
-          <button onclick="copiarMensagem(this)">📋 Copiar Mensagem</button>
-          <div style="font-size: 0.85em; color: gray">Original: ${original}</div>
-        `;
-        historicoDiv.appendChild(item);
-      });
-    }
-
-    function limparHistorico() {
-      if (confirm("Deseja apagar todo o histórico?")) {
-        localStorage.removeItem("historicoLinks");
-        historicoDiv.innerHTML = "";
-        notificar("Histórico limpo!");
-      }
-    }
-
-    function filtrarHistorico() {
-      const termo = document.getElementById('filtro').value.toLowerCase();
-      const itens = historicoDiv.querySelectorAll('.historico-item');
-      itens.forEach(div => {
-        div.style.display = div.textContent.toLowerCase().includes(termo) ? '' : 'none';
-      });
     }
   </script>
 </body>
