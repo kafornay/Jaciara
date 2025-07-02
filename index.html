@@ -93,11 +93,6 @@
       background-color: #0077b6;
     }
 
-    .whatsapp-button svg,
-    .telegram-button svg {
-      margin-right: 8px;
-    }
-
     .toast {
       position: fixed;
       bottom: 20px;
@@ -134,10 +129,6 @@
       border: 1px solid #666;
     }
 
-    .dark-mode button {
-      background-color: #e07a9c;
-    }
-
     .copiado {
       background-color: #fbe4ec !important;
     }
@@ -148,6 +139,15 @@
       border-radius: 10px;
       margin-bottom: 10px;
       background-color: #fff9fc;
+    }
+
+    iframe#preview {
+      width: 100%;
+      height: 400px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      margin-top: 10px;
+      display: none;
     }
 
     @media (max-width: 480px) {
@@ -170,6 +170,7 @@
 
     <label for="link">Link do Produto:</label>
     <input type="text" id="link" placeholder="Cole o link da Shopee aqui" />
+    <iframe id="preview"></iframe>
 
     <label for="mensagem">Mensagem para WhatsApp:</label>
     <textarea id="mensagem" placeholder="Ex: Confira essa oferta imperdível! 👀"></textarea>
@@ -192,6 +193,8 @@
     const historicoDiv = document.getElementById('historico');
     const modoEscuroCheckbox = document.getElementById('modoEscuro');
     const mensagemInput = document.getElementById('mensagem');
+    const linkInput = document.getElementById('link');
+    const previewFrame = document.getElementById('preview');
 
     document.addEventListener("DOMContentLoaded", () => {
       const salvo = localStorage.getItem("codigoAfiliado");
@@ -215,9 +218,19 @@
       document.body.classList.toggle("dark-mode");
     });
 
+    linkInput.addEventListener("input", () => {
+      const url = linkInput.value.trim();
+      if (url.startsWith("http")) {
+        previewFrame.src = url;
+        previewFrame.style.display = "block";
+      } else {
+        previewFrame.style.display = "none";
+      }
+    });
+
     function gerarLink() {
       const codigo = codigoInput.value.trim();
-      const link = document.getElementById('link').value.trim();
+      const link = linkInput.value.trim();
       const mensagem = mensagemInput.value.trim() || "Confira esta oferta incrível!";
       if (!codigo || !link) return notificar("Preencha todos os campos");
 
