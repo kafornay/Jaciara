@@ -70,6 +70,7 @@
     .telegram-button {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       background-color: #25D366;
       color: white;
       border: none;
@@ -103,6 +104,7 @@
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
       animation: fadeInOut 3s ease-in-out;
+      z-index: 1000;
     }
 
     @keyframes fadeInOut {
@@ -224,7 +226,9 @@
       if (!codigo || !link) return notificar("Preencha todos os campos");
 
       const novoLink = link.includes('?') ? `${link}&af_id=${codigo}` : `${link}?af_id=${codigo}`;
-      const whatsLink = `https://wa.me/?text=${encodeURIComponent(mensagem + '\n' + novoLink)}`;
+      const textoCompartilhamento = `${mensagem}\n${novoLink}`;
+
+      const whatsLink = `https://api.whatsapp.com/send?text=${encodeURIComponent(textoCompartilhamento)}`;
       const telegramLink = `https://t.me/share/url?url=${encodeURIComponent(novoLink)}&text=${encodeURIComponent(mensagem)}`;
 
       const item = document.createElement("div");
@@ -236,11 +240,18 @@
         <button onclick="copiarMensagem(this)">📋 Copiar Mensagem</button><br>
         <a href="${whatsLink}" target="_blank" class="whatsapp-button">📲 WhatsApp</a>
         <a href="${telegramLink}" target="_blank" class="telegram-button">📨 Telegram</a>
+        <button onclick="postarStatus('${encodeURIComponent(textoCompartilhamento)}')" class="whatsapp-button" style="background:#128C7E;">📣 Status</button>
       `;
       historicoDiv.prepend(item);
 
       salvarHistorico(link, novoLink);
       notificar("Link gerado com sucesso!");
+    }
+
+    function postarStatus(texto) {
+      navigator.clipboard.writeText(decodeURIComponent(texto));
+      notificar("Mensagem copiada! Abra o WhatsApp e cole no seu Status.");
+      window.open(`https://api.whatsapp.com/send?text=${texto}`, "_blank");
     }
 
     function copiarTexto(btn) {
